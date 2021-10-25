@@ -9,7 +9,7 @@ namespace CS_361_Sliding_Puzzle
 {
     public static class ViewSwitcher
     {
-        public static ViewController viewController;
+        public static Frame viewController;
 
         public static void Switch(UserControl newView)
         {

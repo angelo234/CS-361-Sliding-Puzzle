@@ -16,7 +16,7 @@
     <Compile Update="MainMenuView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ViewController.xaml.cs">
+    <Compile Update="Frame.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -30,7 +30,7 @@
     <Page Update="MainMenuView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="ViewController.xaml">
+    <Page Update="Frame.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

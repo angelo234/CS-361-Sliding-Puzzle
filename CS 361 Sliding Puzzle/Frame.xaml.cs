@@ -17,9 +17,9 @@ namespace CS_361_Sliding_Puzzle
     /// <summary>
     /// Interaction logic for ViewController.xaml
     /// </summary>
-    public partial class ViewController : Window
-    {
-        public ViewController()
+    public partial class Frame : Window
+    {   
+        public Frame()
         {
             InitializeComponent();
             ViewSwitcher.viewController = this;

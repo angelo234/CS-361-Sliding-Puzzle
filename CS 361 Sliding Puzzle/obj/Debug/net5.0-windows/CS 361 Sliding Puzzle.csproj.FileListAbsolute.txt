@@ -26,3 +26,31 @@ C:\Users\angma\source\repos\CS 361 Sliding Puzzle\CS 361 Sliding Puzzle\obj\Debu
 C:\Users\angma\source\repos\CS 361 Sliding Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\GameView.baml
 C:\Users\angma\source\repos\CS 361 Sliding Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\ImageSelectionView.baml
 C:\Users\angma\source\repos\CS 361 Sliding Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\MainMenuView.baml
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\CS 361 Sliding Puzzle.exe
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\CS 361 Sliding Puzzle.deps.json
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\CS 361 Sliding Puzzle.runtimeconfig.json
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\CS 361 Sliding Puzzle.runtimeconfig.dev.json
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\CS 361 Sliding Puzzle.dll
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\ref\CS 361 Sliding Puzzle.dll
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\CS 361 Sliding Puzzle.pdb
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.csproj.AssemblyReference.cache
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\GameView.g.cs
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\ImageSelectionView.g.cs
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\MainMenuView.g.cs
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle_MarkupCompile.cache
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle_MarkupCompile.lref
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\GameView.baml
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\ImageSelectionView.baml
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\MainMenuView.baml
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.g.resources
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.AssemblyInfoInputs.cache
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.AssemblyInfo.cs
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.csproj.CoreCompileInputs.cache
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.dll
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\ref\CS 361 Sliding Puzzle.dll
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.pdb
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.genruntimeconfig.cache
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\Frame.g.cs
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\Frame.baml

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\angma\source\repos\CS 361 Sliding Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\
 CS_361_Sliding_Puzzle
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
-C:\Users\angma\source\repos\CS 361 Sliding Puzzle\CS 361 Sliding Puzzle\App.xaml
-4203819086
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\App.xaml
+4-2096177568
 
-81287376508
+82018199409
 193-1891726104
-GameView.xaml;ImageSelectionView.xaml;MainMenuView.xaml;ViewController.xaml;
+Frame.xaml;GameView.xaml;ImageSelectionView.xaml;MainMenuView.xaml;
 
 False
 
