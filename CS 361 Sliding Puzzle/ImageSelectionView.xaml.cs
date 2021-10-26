@@ -40,7 +40,9 @@ namespace CS_361_Sliding_Puzzle
 
             if (success == true)
             {
-
+                // If image was selected, switch to the Game view
+                // and pass in the image file
+                ViewSwitcher.Switch(new GameView(openFileDialog.FileName));
             }
 
             //System.Diagnostics.Debug.WriteLine(success);

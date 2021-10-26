@@ -20,9 +20,11 @@ namespace CS_361_Sliding_Puzzle
     /// </summary>
     public partial class GameView : UserControl, ISwitchable
     {
-        public GameView()
+        public GameView(string imageFileName)
         {
             InitializeComponent();
+
+            SlidingPuzzleGame game = new SlidingPuzzleGame(null, 4, 4);
         }
 
         public void OnViewSwitched(object state)
