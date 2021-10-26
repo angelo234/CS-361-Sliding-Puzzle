@@ -25,6 +25,15 @@ namespace CS_361_Sliding_Puzzle
             InitializeComponent();
 
             SlidingPuzzleGame game = new SlidingPuzzleGame(null, 4, 4);
+
+            game.TryMoveTile(2, 3);
+            game.PrintBoard();
+
+            game.TryMoveTile(2, 2);
+            game.PrintBoard();
+
+            game.TryMoveTile(1, 1);
+            game.PrintBoard();
         }
 
         public void OnViewSwitched(object state)
