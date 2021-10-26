@@ -7,18 +7,22 @@ using System.Windows.Controls;
 
 namespace CS_361_Sliding_Puzzle
 {
+    /// <summary>
+    /// Static class used to switch the current view
+    /// and credits to website for code structure: https://azerdark.wordpress.com/2010/04/23/multi-page-application-in-wpf/
+    /// </summary>
     public static class ViewSwitcher
     {
-        public static Frame viewController;
+        public static Frame TheFrame;
 
         public static void Switch(UserControl newView)
         {
-            viewController.Navigate(newView);
+            TheFrame.Navigate(newView);
         }
 
         public static void Switch(UserControl newView, object state)
         {
-            viewController.Navigate(newView, state);
+            TheFrame.Navigate(newView, state);
         }
     }
 }

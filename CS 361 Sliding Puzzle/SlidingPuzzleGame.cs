@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace CS_361_Sliding_Puzzle
 {
@@ -13,13 +15,19 @@ namespace CS_361_Sliding_Puzzle
 
         private Tile[,] board;
 
+        private int boardSizeX;
+        private int boardSizeY;
+
         private int rows;
         private int columns;
 
 
-        public SlidingPuzzleGame(Image boardImage, int rows, int columns)
+        public SlidingPuzzleGame(Image boardImage, int boardSizeX, int boardSizeY, int rows, int columns)
         {
-            this.boardImage = boardImage;
+            // Resize input image to fit board size
+            this.boardImage = ResizeImageSimple(boardImage, new Size(boardSizeX, boardSizeY));
+            this.boardSizeX = boardSizeX;
+            this.boardSizeY = boardSizeY;
             this.rows = rows;
             this.columns = columns;
 
@@ -30,6 +38,9 @@ namespace CS_361_Sliding_Puzzle
         private void InitGame()
         {
             board = new Tile[rows, columns];
+
+            int tileSizeX = boardSizeX / columns;
+            int tileSizeY = boardSizeY / rows;
 
             int index = 0;
 
@@ -42,7 +53,13 @@ namespace CS_361_Sliding_Puzzle
                     // Create tiles but leave bottom right empty
                     if (index != rows * columns - 1)
                     {
-                        board[x, y] = new Tile(null, index);
+                        Image tileImage = new Bitmap(tileSizeX, tileSizeY);
+
+                        var g = Graphics.FromImage(tileImage);
+                        g.DrawImage(boardImage, new Rectangle(0, 0, tileSizeX, tileSizeY), new Rectangle(x * tileSizeX, y * tileSizeY, tileSizeX, tileSizeY), GraphicsUnit.Pixel);
+                        g.Dispose();
+
+                        board[x, y] = new Tile(tileImage, index);
                     }
 
                     index++;
@@ -84,6 +101,18 @@ namespace CS_361_Sliding_Puzzle
                 catch (IndexOutOfRangeException) { }
             }
 
+            return null;
+        }
+
+        public Image GetTileImage(int x, int y)
+        {
+            Tile tile = board[x, y];
+
+            if (tile != null)
+            {
+                return board[x, y].TileImage;
+            }
+            
             return null;
         }
 
@@ -159,5 +188,48 @@ namespace CS_361_Sliding_Puzzle
             return true;
         }
 
+        /// <summary>
+        /// https://stackoverflow.com/a/14347746
+        /// </summary>
+        /// <param name="imgToResize"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public static Image ResizeImageSimple(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
+        }
+
+        /// <summary>
+        /// Credits to: https://stackoverflow.com/a/24199315
+        /// Resize the image to the specified width and height.
+        /// </summary>
+        /// <param name="image">The image to resize.</param>
+        /// <param name="width">The width to resize to.</param>
+        /// <param name="height">The height to resize to.</param>
+        /// <returns>The resized image.</returns>
+        private Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
     }
 }

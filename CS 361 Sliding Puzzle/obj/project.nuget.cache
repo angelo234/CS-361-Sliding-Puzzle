@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "n+YaTU9esS+CBYqjXlSWbGkmzVx49cLd8inmE5NJC3nQvzLmjtN7J4gsrHw3EH0zchEMeqs7d6xp3b0JUn4xbw==",
+  "dgSpecHash": "qWzSqJetabIVXhSsGvXjpzSo3uAhBv80DgVDreQc/d0aecC1+COzszlSVfWBkD1anSMljNnDAoYZUKtlnsRhhw==",
   "success": true,
   "projectFilePath": "C:\\Users\\angma\\source\\repos\\CS-361-Sliding-Puzzle\\CS 361 Sliding Puzzle\\CS 361 Sliding Puzzle.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\angma\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\angma\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\angma\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -54,3 +54,7 @@ C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debu
 C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.genruntimeconfig.cache
 C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\Frame.g.cs
 C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\Frame.baml
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\System.Drawing.Common.dll
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\angma\source\repos\CS-361-Sliding-Puzzle\CS 361 Sliding Puzzle\obj\Debug\net5.0-windows\CS 361 Sliding Puzzle.csproj.CopyComplete

@@ -16,13 +16,14 @@ namespace CS_361_Sliding_Puzzle
 {
     /// <summary>
     /// Interaction logic for Frame.xaml
+    /// and credits to website for code structure: https://azerdark.wordpress.com/2010/04/23/multi-page-application-in-wpf/
     /// </summary>
     public partial class Frame : Window
     {   
         public Frame()
         {
             InitializeComponent();
-            ViewSwitcher.viewController = this;
+            ViewSwitcher.TheFrame = this;
             ViewSwitcher.Switch(new MainMenuView());
         }
 

@@ -40,12 +40,32 @@ namespace CS_361_Sliding_Puzzle
 
             if (success == true)
             {
-                // If image was selected, switch to the Game view
-                // and pass in the image file
-                ViewSwitcher.Switch(new GameView(openFileDialog.FileName));
+                System.Drawing.Image image = null;
+
+                try
+                {
+                    image = System.Drawing.Image.FromFile(openFileDialog.FileName);    
+                }
+                catch (Exception)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error with creating image from filename.");
+                }
+
+                if (image != null)
+                {
+                    // If image was selected, switch to the Game view
+                    // and pass in the image file
+                    ViewSwitcher.Switch(new GameView(image));
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Image is null");
+                }
+
+                
             }
 
-            //System.Diagnostics.Debug.WriteLine(success);
+            
         }
 
         private void RandomImageButton_Click(object sender, RoutedEventArgs e)
