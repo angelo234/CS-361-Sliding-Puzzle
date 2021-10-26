@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace CS_361_Sliding_Puzzle
 {
     /// <summary>
-    /// Interaction logic for ViewController.xaml
+    /// Interaction logic for Frame.xaml
     /// </summary>
     public partial class Frame : Window
     {   

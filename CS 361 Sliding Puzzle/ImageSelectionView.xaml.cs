@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,5 +30,25 @@ namespace CS_361_Sliding_Puzzle
         {
             throw new NotImplementedException();
         }
+
+        private void SelectImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg; *.png)|*.jpg;*.png";
+
+            bool? success = openFileDialog.ShowDialog();
+
+            if (success == true)
+            {
+
+            }
+
+            //System.Diagnostics.Debug.WriteLine(success);
+        }
+
+        private void RandomImageButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }  
     }
 }

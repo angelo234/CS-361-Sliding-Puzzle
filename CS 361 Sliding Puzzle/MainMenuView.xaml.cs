@@ -30,9 +30,17 @@ namespace CS_361_Sliding_Puzzle
             throw new NotImplementedException();
         }
 
+        // Switch to the Image Selection view
+
         private void PlayButtonClick(object sender, RoutedEventArgs e)
         {
             ViewSwitcher.Switch(new ImageSelectionView());
+        }
+
+        // Exit program
+        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
