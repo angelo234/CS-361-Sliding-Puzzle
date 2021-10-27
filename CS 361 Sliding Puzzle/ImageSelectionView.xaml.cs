@@ -32,10 +32,13 @@ namespace CS_361_Sliding_Puzzle
             throw new NotImplementedException();
         }
 
-        private void SelectImageButton_Click(object sender, RoutedEventArgs e)
+        private void LocalImageButton_Click(object sender, RoutedEventArgs e)
         {
+            string picsDir = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\pics";
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.jpg; *.png)|*.jpg;*.png";
+            openFileDialog.InitialDirectory = picsDir;
 
             bool? success = openFileDialog.ShowDialog();
 
@@ -62,13 +65,18 @@ namespace CS_361_Sliding_Puzzle
                 {
                     System.Diagnostics.Debug.WriteLine("Image is null");
                 }
-
-                
             }
-
-            
         }
 
+        // Since service is not available yet, just select image from computer
+        private void InternetImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            LocalImageButton_Click(sender, e);
+        }
+
+
+
+        /*
         private void RandomImageButton_Click(object sender, RoutedEventArgs e)
         {
             Random rand = new Random();
@@ -105,5 +113,6 @@ namespace CS_361_Sliding_Puzzle
                 System.Diagnostics.Debug.WriteLine("Image is null");
             }
         } 
+        */
     }
 }

@@ -5,8 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CS_361_Sliding_Puzzle"
         mc:Ignorable="d"
-        Title="Sliding Puzzle Game" Height="600" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Sliding Puzzle Game" Height="600" Width="600" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
 </Window>
