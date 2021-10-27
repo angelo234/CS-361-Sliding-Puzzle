@@ -48,6 +48,8 @@ namespace CS_361_Sliding_Puzzle
             */
 
             game.PrintBoard();
+
+            RenderCanvas();
         }
 
 
@@ -91,9 +93,15 @@ namespace CS_361_Sliding_Puzzle
             TheCanvas.Background = new ImageBrush(bitmapSource);
         }
 
+        // When user clicks on the board
         private void TheCanvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Clicked!");
+            System.Windows.Point mousePos = e.GetPosition(TheCanvas);
+
+            int mouseX = (int) mousePos.X;
+            int mouseY = (int) mousePos.Y;
+
+            game.ClickedOnBoard(mouseX, mouseY);
 
             RenderCanvas();
         }

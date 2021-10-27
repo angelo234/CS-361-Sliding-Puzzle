@@ -21,6 +21,8 @@ namespace CS_361_Sliding_Puzzle
         private int rows;
         private int columns;
 
+        private int tileSizeX;
+        private int tileSizeY;
 
         public SlidingPuzzleGame(Image boardImage, int boardSizeX, int boardSizeY, int rows, int columns)
         {
@@ -39,8 +41,8 @@ namespace CS_361_Sliding_Puzzle
         {
             board = new Tile[rows, columns];
 
-            int tileSizeX = boardSizeX / columns;
-            int tileSizeY = boardSizeY / rows;
+            tileSizeX = boardSizeX / columns;
+            tileSizeY = boardSizeY / rows;
 
             int index = 0;
 
@@ -48,8 +50,6 @@ namespace CS_361_Sliding_Puzzle
             {
                 for (int x = 0; x < columns; x++)
                 {
-                    // ASSIGN IMAGE TO TILES LATER (null)
-
                     // Create tiles but leave bottom right empty
                     if (index != rows * columns - 1)
                     {
@@ -67,41 +67,10 @@ namespace CS_361_Sliding_Puzzle
             }
         }
 
-        // Returns null if cannot be moved
-        // or the position of the free space
-        private int[] CanMoveTile(int tileX, int tileY)
+        // Swaps all 16 places
+        private void ScrambleTiles()
         {
-            for (int x = -1; x < 2; x += 2)
-            {
-                try
-                {
-                    int xPos = tileX + x;
-                    int yPos = tileY;
-
-                    if (board[xPos, yPos] == null)
-                    {
-                        return new int[] { xPos, yPos };
-                    }
-                }
-                catch (IndexOutOfRangeException) { }
-            }
-
-            for (int y = -1; y < 2; y += 2)
-            {
-                try
-                {
-                    int xPos = tileX;
-                    int yPos = tileY + y;
-
-                    if (board[xPos, yPos] == null)
-                    {
-                        return new int[] { xPos, yPos };
-                    }
-                }
-                catch (IndexOutOfRangeException) { }
-            }
-
-            return null;
+            
         }
 
         public Image GetTileImage(int x, int y)
@@ -116,6 +85,7 @@ namespace CS_361_Sliding_Puzzle
             return null;
         }
 
+        // For debugging purposes
         public void PrintBoard()
         {
             for (int y = 0; y < rows; y++)
@@ -143,10 +113,57 @@ namespace CS_361_Sliding_Puzzle
             }
         }
 
+        // Returns null if cannot be moved
+        // or the position of the free space
+        private int[] CanMoveTile(int tileX, int tileY)
+        {
+            for (int x = -1; x < 2; x += 2)
+            {
+                int xPos = tileX + x;
+                int yPos = tileY;
+
+                if (xPos < columns && xPos >= 0)
+                {
+                    if (board[xPos, yPos] == null)
+                    {
+                        return new int[] { xPos, yPos };
+                    }
+                }
+            }
+
+            for (int y = -1; y < 2; y += 2)
+            {
+                int xPos = tileX;
+                int yPos = tileY + y;
+
+                if (yPos < rows && yPos >= 0)
+                {
+                    if (board[xPos, yPos] == null)
+                    {
+                        return new int[] { xPos, yPos };
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        // Called when mouse clicked on the board
+        public void ClickedOnBoard(int mouseX, int mouseY)
+        {
+            int tileX = Math.Clamp(mouseX / tileSizeX, 0, columns - 1);
+            int tileY = Math.Clamp(mouseY / tileSizeY, 0, rows - 1);
+
+            TryMoveTile(tileX, tileY);
+
+            //System.Diagnostics.Debug.WriteLine("{0},{1}", tileX, tileY);
+        }
+
+        // Tries to move the specified tile
         public bool TryMoveTile(int tileX, int tileY)
         {
             int[] freeSpace = CanMoveTile(tileX, tileY);
-            
+
             if (freeSpace != null)
             {
                 // Place tile at empty space
@@ -156,14 +173,12 @@ namespace CS_361_Sliding_Puzzle
 
                 System.Diagnostics.Debug.WriteLine(board[tileX, tileY]);
 
-                //bool won = CheckWin();
+                bool won = CheckWin();
 
-                //Console.WriteLine(won);
+                System.Diagnostics.Debug.WriteLine(won);
 
                 return true;
             }
-
-            System.Diagnostics.Debug.WriteLine("Couldn't move tile");
 
             return false;
         }
@@ -176,9 +191,12 @@ namespace CS_361_Sliding_Puzzle
             {
                 for (int x = 0; x < columns; x++)
                 {
-                    if (index != rows * columns - 1 && board[x, y].Index != index)
+                    if (index != rows * columns - 1)
                     {
-                        return false;
+                        if (board[x, y] == null || board[x, y].Index != index)
+                        {
+                            return false;
+                        }
                     }
 
                     index++;
