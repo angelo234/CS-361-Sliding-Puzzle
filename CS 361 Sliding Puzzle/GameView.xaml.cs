@@ -24,8 +24,8 @@ namespace CS_361_Sliding_Puzzle
     {
         private SlidingPuzzleGame game;
 
-        private int rows = 4;
-        private int columns = 4; 
+        private int rows = 3;
+        private int columns = 3; 
 
         public GameView(System.Drawing.Image image)
         {
@@ -101,9 +101,14 @@ namespace CS_361_Sliding_Puzzle
             int mouseX = (int) mousePos.X;
             int mouseY = (int) mousePos.Y;
 
-            game.ClickedOnBoard(mouseX, mouseY);
+            bool won = game.ClickedOnBoard(mouseX, mouseY);
 
             RenderCanvas();
+
+            if (won)
+            {
+
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ namespace CS_361_Sliding_Puzzle
 {
     public class SlidingPuzzleGame
     {
+        private Random rand;
+
         private Image boardImage;
 
         private Tile[,] board;
@@ -39,6 +41,8 @@ namespace CS_361_Sliding_Puzzle
 
         private void InitGame()
         {
+            rand = new Random();
+
             board = new Tile[rows, columns];
 
             tileSizeX = boardSizeX / columns;
@@ -65,12 +69,47 @@ namespace CS_361_Sliding_Puzzle
                     index++;
                 }
             }
+
+            ScrambleTiles();
         }
 
-        // Swaps all 16 places
+        // Randomly scramble tiles
         private void ScrambleTiles()
         {
-            
+            for (int i = 0; i < 100; i++)
+            {
+                int tileX = rand.Next(0, columns);
+                int tileY = rand.Next(0, rows);
+
+                TryMoveTile(tileX, tileY);
+            }
+        }
+
+        private int[] GetDifferentTilePos(int tileX, int tileY)
+        {
+            for (int x = -1; x < 2; x += 2)
+            {
+                int xPos = tileX + x;
+                int yPos = tileY;
+
+                if (xPos < columns && xPos >= 0)
+                {
+                    return new int[] { xPos, yPos };
+                }
+            }
+
+            for (int y = -1; y < 2; y += 2)
+            {
+                int xPos = tileX;
+                int yPos = tileY + y;
+
+                if (yPos < rows && yPos >= 0)
+                {
+                    return new int[] { xPos, yPos };
+                }
+            }
+
+            return null;
         }
 
         public Image GetTileImage(int x, int y)
@@ -149,14 +188,12 @@ namespace CS_361_Sliding_Puzzle
         }
 
         // Called when mouse clicked on the board
-        public void ClickedOnBoard(int mouseX, int mouseY)
+        public bool ClickedOnBoard(int mouseX, int mouseY)
         {
             int tileX = Math.Clamp(mouseX / tileSizeX, 0, columns - 1);
             int tileY = Math.Clamp(mouseY / tileSizeY, 0, rows - 1);
 
-            TryMoveTile(tileX, tileY);
-
-            //System.Diagnostics.Debug.WriteLine("{0},{1}", tileX, tileY);
+            return TryMoveTile(tileX, tileY);
         }
 
         // Tries to move the specified tile

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,7 +71,39 @@ namespace CS_361_Sliding_Puzzle
 
         private void RandomImageButton_Click(object sender, RoutedEventArgs e)
         {
+            Random rand = new Random();
 
-        }  
+            // Get images from folder containing bunch of images in project directory
+
+            string picsDir = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "/pics";
+
+            string[] files = Directory.GetFiles(picsDir);
+
+            // Choose random image from directory
+
+            string chosenFile = files[rand.Next(0, files.Length)];
+
+            System.Drawing.Image image = null;
+
+            try
+            {
+                image = System.Drawing.Image.FromFile(chosenFile);
+            }
+            catch (Exception)
+            {
+                System.Diagnostics.Debug.WriteLine("Error with creating image from filename.");
+            }
+
+            if (image != null)
+            {
+                // If image found then switch to the Game view
+                // and pass in the image file
+                ViewSwitcher.Switch(new GameView(image));
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Image is null");
+            }
+        } 
     }
 }
