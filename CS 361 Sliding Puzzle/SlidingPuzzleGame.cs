@@ -13,9 +13,10 @@ namespace CS_361_Sliding_Puzzle
     {
         private Random rand;
 
-        private Image boardImage;
-
         private Tile[,] board;
+
+        private Image boardImage;
+        private Tile lastTile;
 
         private int boardSizeX;
         private int boardSizeY;
@@ -25,6 +26,9 @@ namespace CS_361_Sliding_Puzzle
 
         private int tileSizeX;
         private int tileSizeY;
+
+        private bool initialized = false;
+        private bool running = false;
 
         public SlidingPuzzleGame(Image boardImage, int boardSizeX, int boardSizeY, int rows, int columns)
         {
@@ -54,29 +58,37 @@ namespace CS_361_Sliding_Puzzle
             {
                 for (int x = 0; x < columns; x++)
                 {
+                    Image tileImage = new Bitmap(tileSizeX, tileSizeY);
+
+                    var g = Graphics.FromImage(tileImage);
+                    g.DrawImage(boardImage, new Rectangle(0, 0, tileSizeX, tileSizeY), new Rectangle(x * tileSizeX, y * tileSizeY, tileSizeX, tileSizeY), GraphicsUnit.Pixel);
+
                     // Create tiles but leave bottom right empty
                     if (index != rows * columns - 1)
                     {
-                        Image tileImage = new Bitmap(tileSizeX, tileSizeY);
-
-                        var g = Graphics.FromImage(tileImage);
-                        g.DrawImage(boardImage, new Rectangle(0, 0, tileSizeX, tileSizeY), new Rectangle(x * tileSizeX, y * tileSizeY, tileSizeX, tileSizeY), GraphicsUnit.Pixel);
-                        g.Dispose();
-
                         board[x, y] = new Tile(tileImage, index);
                     }
+                    else
+                    {
+                        lastTile = new Tile(tileImage, index);
+                    }
+
+                    g.Dispose();
 
                     index++;
                 }
             }
 
             ScrambleTiles();
+
+            running = true;
+            initialized = true;
         }
 
         // Randomly scramble tiles
         private void ScrambleTiles()
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 20; i++)
             {
                 int tileX = rand.Next(0, columns);
                 int tileY = rand.Next(0, rows);
@@ -123,7 +135,7 @@ namespace CS_361_Sliding_Puzzle
             
             return null;
         }
-
+        
         // For debugging purposes
         public void PrintBoard()
         {
@@ -188,7 +200,11 @@ namespace CS_361_Sliding_Puzzle
         }
 
         // Called when mouse clicked on the board
-        public bool ClickedOnBoard(int mouseX, int mouseY)
+        // returns an integer value based on the result of moving the tile
+        // 0 == couldn't move tile
+        // 1 == moved tile succesfully
+        // 2 == won the game
+        public int ClickedOnBoard(int mouseX, int mouseY)
         {
             int tileX = Math.Clamp(mouseX / tileSizeX, 0, columns - 1);
             int tileY = Math.Clamp(mouseY / tileSizeY, 0, rows - 1);
@@ -197,8 +213,18 @@ namespace CS_361_Sliding_Puzzle
         }
 
         // Tries to move the specified tile
-        public bool TryMoveTile(int tileX, int tileY)
+        // returns an integer value based on the result of moving the tile
+        // 0 == couldn't move tile
+        // 1 == moved tile succesfully
+        // 2 == won the game
+        public int TryMoveTile(int tileX, int tileY)
         {
+            // If game ended then just return false
+            if (!running && initialized)
+            {
+                return 0;
+            }
+
             int[] freeSpace = CanMoveTile(tileX, tileY);
 
             if (freeSpace != null)
@@ -207,19 +233,24 @@ namespace CS_361_Sliding_Puzzle
 
                 board[freeSpace[0], freeSpace[1]] = board[tileX, tileY];
                 board[tileX, tileY] = null;
+              
+                if (initialized)
+                {
+                    // Check if won and return value based on result
+                    bool won = CheckWin();
+                    return won ? 2 : 1;
+                }
+                else
+                {
+                    return 1;
+                }
 
-                System.Diagnostics.Debug.WriteLine(board[tileX, tileY]);
-
-                bool won = CheckWin();
-
-                System.Diagnostics.Debug.WriteLine(won);
-
-                return true;
             }
 
-            return false;
+            return 0;
         }
 
+        // Check if all tiles are in correct order to determine if won game
         public bool CheckWin()
         {
             int index = 0;
@@ -239,6 +270,11 @@ namespace CS_361_Sliding_Puzzle
                     index++;
                 }
             }
+
+            // If here, game won and draw last tile!
+
+            board[columns - 1, rows - 1] = lastTile;
+            running = false;
 
             return true;
         }

@@ -22,6 +22,8 @@ namespace CS_361_Sliding_Puzzle
     /// </summary>
     public partial class GameView : UserControl, ISwitchable
     {
+        private System.Drawing.Image boardImage;
+
         private SlidingPuzzleGame game;
 
         private int rows = 3;
@@ -30,36 +32,20 @@ namespace CS_361_Sliding_Puzzle
         public GameView(System.Drawing.Image image)
         {
             InitializeComponent();
-            
+
+            boardImage = image;
+
             game = new SlidingPuzzleGame(image, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
 
-            // Testing purposes
-
-            /*
-            game.TryMoveTile(2, 3);
-            game.PrintBoard();
-
-            game.TryMoveTile(2, 2);
-            game.PrintBoard();
-
-            game.TryMoveTile(1, 1);
-            game.PrintBoard();
-
-            */
-
-            game.PrintBoard();
-
-            RenderCanvas();
+            RenderCanvas(0);
         }
-
-
 
         public void OnViewSwitched(object state)
         {
             throw new NotImplementedException();
         }
 
-        private void RenderCanvas()
+        private void RenderCanvas(int gameResult)
         {
             Bitmap theRender = new Bitmap((int)TheCanvas.Width, (int)TheCanvas.Height);
 
@@ -76,6 +62,31 @@ namespace CS_361_Sliding_Puzzle
                         g.DrawImage(tileImage, new System.Drawing.Rectangle(x * tileImage.Width, y * tileImage.Height, tileImage.Width, tileImage.Height), new System.Drawing.Rectangle(0, 0, tileImage.Width, tileImage.Height), GraphicsUnit.Pixel);
                     }
                     
+                }
+            }
+
+            // If player won game then display "You Win!" text
+            if(gameResult == 2)
+            {
+                //g.DrawString("You Win!", new Font("Arial", 36), new SolidBrush(System.Drawing.Color.Black), 98, 98);
+                //g.DrawString("You Win!", new Font("Arial", 36), new SolidBrush(System.Drawing.Color.White), 100, 100);
+
+                using (Font font1 = new Font("Arial", 48, GraphicsUnit.Point))
+                {
+                    System.Drawing.Rectangle rect1 = new System.Drawing.Rectangle(-3, -3, (int)TheCanvas.Width, (int)TheCanvas.Height);
+                    System.Drawing.Rectangle rect2 = new System.Drawing.Rectangle(0, 0, (int)TheCanvas.Width, (int)TheCanvas.Height);
+
+                    // Create a StringFormat object with the each line of text, and the block
+                    // of text centered on the page.
+                    StringFormat stringFormat = new StringFormat();
+                    stringFormat.Alignment = StringAlignment.Center;
+                    stringFormat.LineAlignment = StringAlignment.Center;
+
+                    g.DrawString("You Win!", font1, System.Drawing.Brushes.Black, rect1, stringFormat);
+                    
+
+                    g.DrawString("You Win!", font1, System.Drawing.Brushes.White, rect2, stringFormat);
+                    g.DrawRectangle(Pens.Black, System.Drawing.Rectangle.Round(rect2));
                 }
             }
 
@@ -101,14 +112,28 @@ namespace CS_361_Sliding_Puzzle
             int mouseX = (int) mousePos.X;
             int mouseY = (int) mousePos.Y;
 
-            bool won = game.ClickedOnBoard(mouseX, mouseY);
+            int result = game.ClickedOnBoard(mouseX, mouseY);
 
-            RenderCanvas();
+            RenderCanvas(result);
 
-            if (won)
+            if (result == 2)
             {
+                // Player won game
+
 
             }
         }
+
+        private void NewGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            game = new SlidingPuzzleGame(boardImage, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
+            RenderCanvas(0);
+        }
+
+        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewSwitcher.Switch(new MainMenuView());
+        }
+
     }
 }

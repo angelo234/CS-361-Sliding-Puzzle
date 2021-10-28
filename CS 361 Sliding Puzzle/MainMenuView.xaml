@@ -14,7 +14,8 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Center" Margin="0,220,0,0" VerticalAlignment="Top" Height="60" Width="150" FontSize="36" Click="PlayButtonClick" Visibility="Visible"/>
-        <Button x:Name="QuitButton" Content="Quit" HorizontalAlignment="Center" Margin="0,320,0,0" VerticalAlignment="Top" Height="60" Width="150" FontSize="36" Click="QuitButton_Click"/>
+        <Button x:Name="QuitButton" Content="Exit" HorizontalAlignment="Center" Margin="0,320,0,0" VerticalAlignment="Top" Height="60" Width="150" FontSize="36" Click="QuitButton_Click"/>
+        <Label Content="Sliding Puzzle Game" HorizontalAlignment="Center" Margin="0,98,0,0" VerticalAlignment="Top" Height="79" Width="489" FontSize="48" HorizontalContentAlignment="Center" Background="{x:Null}" Foreground="White"/>
 
     </Grid>
 </UserControl>
