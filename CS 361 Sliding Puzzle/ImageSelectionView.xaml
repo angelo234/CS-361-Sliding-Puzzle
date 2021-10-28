@@ -15,6 +15,8 @@
         </Grid.Background>
         <Button x:Name="InternetImageButton" Content="Get Image from a Website" HorizontalAlignment="Center" Margin="0,320,0,0" VerticalAlignment="Top" Height="60" Width="385" FontSize="28" Click="InternetImageButton_Click"/>
         <Button x:Name="LocalImageButton" Content="Select Image on Computer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="385" FontSize="28" Margin="0,220,0,0" Click="LocalImageButton_Click"/>
+        <Button x:Name="BackButton" Content="Back to Main Menu" HorizontalAlignment="Center" Margin="0,447,0,0" VerticalAlignment="Top" Height="60" Width="276" FontSize="28" Click="BackButton_Click"/>
+        <Label Content="Select an image" HorizontalAlignment="Center" Margin="0,98,0,0" VerticalAlignment="Top" Height="79" Width="489" FontSize="48" HorizontalContentAlignment="Center" Background="{x:Null}" Foreground="White"/>
 
     </Grid>
 </UserControl>

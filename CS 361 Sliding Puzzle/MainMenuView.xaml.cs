@@ -34,7 +34,7 @@ namespace CS_361_Sliding_Puzzle
 
         private void PlayButtonClick(object sender, RoutedEventArgs e)
         {
-            ViewSwitcher.Switch(new ImageSelectionView());
+            ViewSwitcher.Switch("image_selection_view");
         }
 
         // Exit program

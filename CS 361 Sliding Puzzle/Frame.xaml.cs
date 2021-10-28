@@ -24,7 +24,12 @@ namespace CS_361_Sliding_Puzzle
         {
             InitializeComponent();
             ViewSwitcher.TheFrame = this;
-            ViewSwitcher.Switch(new MainMenuView());
+
+            ViewSwitcher.TheViews.Add("main_menu", new MainMenuView());
+            ViewSwitcher.TheViews.Add("image_selection_view", new ImageSelectionView());
+            ViewSwitcher.TheViews.Add("game_view", new GameView());
+
+            ViewSwitcher.Switch("main_menu");
         }
 
         public void Navigate(UserControl nextView)

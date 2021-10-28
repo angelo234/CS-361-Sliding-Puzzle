@@ -14,15 +14,16 @@ namespace CS_361_Sliding_Puzzle
     public static class ViewSwitcher
     {
         public static Frame TheFrame;
+        public static Dictionary<string, UserControl> TheViews = new Dictionary<string, UserControl>();
 
-        public static void Switch(UserControl newView)
+        public static void Switch(string newView)
         {
-            TheFrame.Navigate(newView);
+            TheFrame.Navigate(TheViews[newView]);
         }
 
-        public static void Switch(UserControl newView, object state)
+        public static void Switch(string newView, object state)
         {
-            TheFrame.Navigate(newView, state);
+            TheFrame.Navigate(TheViews[newView], state);
         }
     }
 }

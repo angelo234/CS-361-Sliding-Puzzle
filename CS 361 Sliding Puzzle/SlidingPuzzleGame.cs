@@ -280,7 +280,7 @@ namespace CS_361_Sliding_Puzzle
         }
 
         /// <summary>
-        /// https://stackoverflow.com/a/14347746
+        /// Credits to: https://stackoverflow.com/a/14347746
         /// </summary>
         /// <param name="imgToResize"></param>
         /// <param name="size"></param>

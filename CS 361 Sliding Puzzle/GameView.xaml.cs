@@ -29,20 +29,23 @@ namespace CS_361_Sliding_Puzzle
         private int rows = 3;
         private int columns = 3; 
 
-        public GameView(System.Drawing.Image image)
+        public GameView()
         {
-            InitializeComponent();
-
-            boardImage = image;
-
-            game = new SlidingPuzzleGame(image, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
-
-            RenderCanvas(0);
+            InitializeComponent();      
         }
 
         public void OnViewSwitched(object state)
         {
-            throw new NotImplementedException();
+            if (state == null)
+            {
+                return;
+            }
+
+            boardImage = (System.Drawing.Image) state;
+
+            game = new SlidingPuzzleGame(boardImage, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
+
+            RenderCanvas(0);
         }
 
         private void RenderCanvas(int gameResult)
@@ -119,8 +122,6 @@ namespace CS_361_Sliding_Puzzle
             if (result == 2)
             {
                 // Player won game
-
-
             }
         }
 
@@ -132,7 +133,9 @@ namespace CS_361_Sliding_Puzzle
 
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewSwitcher.Switch(new MainMenuView());
+            game = null;
+
+            ViewSwitcher.Switch("main_menu");
         }
 
     }

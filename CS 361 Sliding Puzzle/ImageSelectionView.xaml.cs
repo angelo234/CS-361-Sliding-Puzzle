@@ -59,7 +59,7 @@ namespace CS_361_Sliding_Puzzle
                 {
                     // If image was selected, switch to the Game view
                     // and pass in the image file
-                    ViewSwitcher.Switch(new GameView(image));
+                    ViewSwitcher.Switch("game_view", image);
                 }
                 else
                 {
@@ -74,7 +74,10 @@ namespace CS_361_Sliding_Puzzle
             LocalImageButton_Click(sender, e);
         }
 
-
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewSwitcher.Switch("main_menu");
+        }
 
         /*
         private void RandomImageButton_Click(object sender, RoutedEventArgs e)
