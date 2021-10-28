@@ -77,7 +77,7 @@ namespace CS_361_Sliding_Puzzle {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/CS 361 Sliding Puzzle;V1.0.0.0;component/imageselectionview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/CS 361 Sliding Puzzle;component/imageselectionview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ImageSelectionView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

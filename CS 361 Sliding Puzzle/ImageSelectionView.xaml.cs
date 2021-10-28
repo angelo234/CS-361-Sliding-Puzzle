@@ -34,11 +34,11 @@ namespace CS_361_Sliding_Puzzle
 
         private void LocalImageButton_Click(object sender, RoutedEventArgs e)
         {
-            string picsDir = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\pics";
+            //string picsDir = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\pics";
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.jpg; *.png)|*.jpg;*.png";
-            openFileDialog.InitialDirectory = picsDir;
+            //openFileDialog.InitialDirectory = picsDir;
 
             bool? success = openFileDialog.ShowDialog();
 
