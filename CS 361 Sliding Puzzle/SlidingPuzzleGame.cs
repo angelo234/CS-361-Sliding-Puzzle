@@ -88,7 +88,7 @@ namespace CS_361_Sliding_Puzzle
         // Randomly scramble tiles
         private void ScrambleTiles()
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 100; i++)
             {
                 int tileX = rand.Next(0, columns);
                 int tileY = rand.Next(0, rows);
