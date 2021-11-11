@@ -34,7 +34,7 @@ namespace CS_361_Sliding_Puzzle
 
         public void Navigate(UserControl nextView)
         {
-            this.Content = nextView;
+            Navigate(nextView, null);
         }
 
         public void Navigate(UserControl nextView, object state)

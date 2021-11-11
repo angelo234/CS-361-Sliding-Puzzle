@@ -25,9 +25,9 @@ namespace CS_361_Sliding_Puzzle
             InitializeComponent();
         }
 
-        void ISwitchable.OnViewSwitched(object state)
+        public void OnViewSwitched(object state)
         {
-            throw new NotImplementedException();
+            
         }
 
         // Switch to the Image Selection view

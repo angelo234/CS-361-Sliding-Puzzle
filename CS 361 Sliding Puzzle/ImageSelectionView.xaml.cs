@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,7 +30,9 @@ namespace CS_361_Sliding_Puzzle
 
         public void OnViewSwitched(object state)
         {
-            throw new NotImplementedException();
+
+            WebsiteURLGrid.Visibility = Visibility.Hidden;
+            InternetImageButton.Visibility = Visibility.Visible;
         }
 
         private void LocalImageButton_Click(object sender, RoutedEventArgs e)
@@ -68,15 +71,81 @@ namespace CS_361_Sliding_Puzzle
             }
         }
 
-        // Since service is not available yet, just select image from computer
         private void InternetImageButton_Click(object sender, RoutedEventArgs e)
         {
-            LocalImageButton_Click(sender, e);
+            WebsiteURLGrid.Visibility = Visibility.Visible;
+            InternetImageButton.Visibility = Visibility.Hidden;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             ViewSwitcher.Switch("main_menu");
+        }
+
+       
+
+        private void OKURLButton_Click(object sender, RoutedEventArgs e)
+        {
+            string url = URLTextBox.Text;
+
+            string serviceFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Image-Web-Scrapper-main\\";
+            string servicePipeFilePath = serviceFolderPath + "images.txt";
+            
+            File.AppendAllText(servicePipeFilePath, Environment.NewLine + url);
+
+            long fileLength = new System.IO.FileInfo(servicePipeFilePath).Length;
+
+            string fileName = null;
+
+            bool gotResponse = false;
+
+            for (int i = 0 ; i < 5; i++)
+            {
+                Thread.Sleep(1000);
+                
+                if (new System.IO.FileInfo(servicePipeFilePath).Length != fileLength)
+                {
+                    fileName = File.ReadLines(servicePipeFilePath).Last();
+
+                    gotResponse = true;
+
+                    break;
+                }
+            }
+
+            if (!gotResponse)
+            {
+                MessageBox.Show("Didn't get a response from Web Scrapper service in time. Please make sure the Web Scrapper service is running.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            System.Diagnostics.Debug.WriteLine(fileName);
+
+            System.Drawing.Image image = null;
+
+            try
+            {
+                image = System.Drawing.Image.FromFile(serviceFolderPath + "images\\" + fileName + ".jpg");
+            }
+            catch (Exception)
+            {
+                System.Diagnostics.Debug.WriteLine("Error with creating image from filename.");
+
+                MessageBox.Show("Unable to retrieve an image from the website. Please try a different website.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if (image != null)
+            {
+                // If image was selected, switch to the Game view
+                // and pass in the image file
+                ViewSwitcher.Switch("game_view", image);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Image is null");
+            }
+
+            URLTextBox.Text = "";
         }
 
         /*
