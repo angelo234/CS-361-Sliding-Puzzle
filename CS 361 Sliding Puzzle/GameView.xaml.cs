@@ -135,6 +135,8 @@ namespace CS_361_Sliding_Puzzle
         {
             game = null;
 
+            boardImage.Dispose();
+
             ViewSwitcher.Switch("main_menu");
         }
 
