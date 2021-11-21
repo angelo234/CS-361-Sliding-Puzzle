@@ -10,7 +10,7 @@
         <Canvas x:Name="TheCanvas" Margin="0,0,0,0" MouseUp="TheCanvas_MouseUp" Width="500" Height="500" OpacityMask="White" Background="White"/>
         <Button x:Name="NewGameButton" Content="New Game" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.34,0.708" Height="30" Width="77" FontSize="14" Click="NewGameButton_Click"/>
         <Button x:Name="QuitButton" Content="Quit" HorizontalAlignment="Left" Margin="92,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.34,0.708" Height="30" Width="75" FontSize="14" Click="QuitButton_Click"/>
-        <Label x:Name="TimerLabel" Content="" HorizontalAlignment="Left" Margin="531,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.261,1.014" Width="59" FontSize="16" Height="30"/>
+        <Label x:Name="TimerLabel" Content="Time:  0" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="510,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.261,1.014" Width="80" FontSize="16" Height="30"/>
 
     </Grid>
 </UserControl>

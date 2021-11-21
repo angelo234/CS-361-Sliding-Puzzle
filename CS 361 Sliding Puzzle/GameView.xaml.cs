@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -27,11 +29,18 @@ namespace CS_361_Sliding_Puzzle
         private SlidingPuzzleGame game;
 
         private int rows = 3;
-        private int columns = 3; 
+        private int columns = 3;
+
+        private Timer timer;
+        private long timeElapsed = 0;
 
         public GameView()
         {
-            InitializeComponent();      
+            InitializeComponent();
+
+            timer = new System.Timers.Timer();
+            timer.Interval = 1000;
+            timer.Elapsed += UpdateTimerLabel;
         }
 
         public void OnViewSwitched(object state)
@@ -46,6 +55,19 @@ namespace CS_361_Sliding_Puzzle
             game = new SlidingPuzzleGame(boardImage, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
 
             RenderCanvas(0);
+
+            // reset timer
+            timeElapsed = 0;
+            timer.Start();
+        }
+
+        private void UpdateTimerLabel(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                timeElapsed++;
+                TimerLabel.Content = "Time: " + timeElapsed;
+            })); 
         }
 
         private void RenderCanvas(int gameResult)
@@ -90,6 +112,8 @@ namespace CS_361_Sliding_Puzzle
 
                     g.DrawString("You Win!", font1, System.Drawing.Brushes.White, rect2, stringFormat);
                     g.DrawRectangle(Pens.Black, System.Drawing.Rectangle.Round(rect2));
+
+                    timer.Stop();
                 }
             }
 
@@ -133,9 +157,14 @@ namespace CS_361_Sliding_Puzzle
 
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
+            // reset everything
+
             game = null;
 
             boardImage.Dispose();
+            timer.Stop();
+
+            TimerLabel.Content = "Time: 0";
 
             ViewSwitcher.Switch("main_menu");
         }
