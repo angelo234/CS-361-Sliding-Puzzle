@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -24,6 +25,8 @@ namespace CS_361_Sliding_Puzzle
     /// </summary>
     public partial class GameView : UserControl, ISwitchable
     {
+        private Storyboard storyboard;
+
         private System.Drawing.Image boardImage;
 
         private SlidingPuzzleGame game;
@@ -38,11 +41,25 @@ namespace CS_361_Sliding_Puzzle
         {
             InitializeComponent();
 
+            // Animation for the canvas opacity on win
+
+            var animation1 = new DoubleAnimation();
+            animation1.From = 1.0;
+            animation1.To = 0.5;
+            animation1.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+
+            storyboard = new Storyboard();
+            storyboard.Children.Add(animation1);
+
+            Storyboard.SetTargetName(animation1, TheCanvas.Name);
+            Storyboard.SetTargetProperty(animation1, new PropertyPath(OpacityProperty));
+
             timer = new System.Timers.Timer();
             timer.Interval = 1000;
             timer.Elapsed += UpdateTimerLabel;
         }
 
+        // Reset all variables
         public void OnViewSwitched(object state)
         {
             if (state == null)
@@ -53,6 +70,9 @@ namespace CS_361_Sliding_Puzzle
             boardImage = (System.Drawing.Image) state;
 
             game = new SlidingPuzzleGame(boardImage, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
+
+            // reset animations
+            storyboard.Stop(TheCanvas);
 
             RenderCanvas(0);
 
@@ -93,6 +113,7 @@ namespace CS_361_Sliding_Puzzle
             // If player won game then display "You Win!" text
             if(gameResult == 2)
             {
+                storyboard.Begin(TheCanvas, true);
                 //g.DrawString("You Win!", new Font("Arial", 36), new SolidBrush(System.Drawing.Color.Black), 98, 98);
                 //g.DrawString("You Win!", new Font("Arial", 36), new SolidBrush(System.Drawing.Color.White), 100, 100);
 
@@ -152,6 +173,9 @@ namespace CS_361_Sliding_Puzzle
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
             game = new SlidingPuzzleGame(boardImage, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
+            storyboard.Stop(TheCanvas);
+            timeElapsed = 0;
+            timer.Start();
             RenderCanvas(0);
         }
 
