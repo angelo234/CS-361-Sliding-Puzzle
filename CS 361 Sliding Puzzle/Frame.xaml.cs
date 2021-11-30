@@ -28,7 +28,6 @@ namespace CS_361_Sliding_Puzzle
             InitializeComponent();
 
             // Animate opacity when changing views
-
             var animation1 = new DoubleAnimation();
             animation1.From = 0;
             animation1.To = 1.0;
@@ -40,7 +39,7 @@ namespace CS_361_Sliding_Puzzle
             Storyboard.SetTargetName(animation1, Name);
             Storyboard.SetTargetProperty(animation1, new PropertyPath(OpacityProperty));
 
-
+            // Initialize view switcher
             ViewSwitcher.TheFrame = this;
 
             ViewSwitcher.TheViews.Add("main_menu", new MainMenuView());
@@ -66,13 +65,7 @@ namespace CS_361_Sliding_Puzzle
                 ISwitchable view = nextView as ISwitchable;
 
                 view.OnViewSwitched(state);
-            } 
-            else
-            {
-                throw new ArgumentException("NextPage is not ISwitchable! "
-                  + nextView.Name.ToString());
-            }
-                
+            }          
         }
     }
 }

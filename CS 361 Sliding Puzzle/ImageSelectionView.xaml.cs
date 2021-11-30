@@ -30,18 +30,15 @@ namespace CS_361_Sliding_Puzzle
 
         public void OnViewSwitched(object state)
         {
-
             WebsiteURLGrid.Visibility = Visibility.Hidden;
             InternetImageButton.Visibility = Visibility.Visible;
         }
 
+        // User requests to use an image from their computer
         private void LocalImageButton_Click(object sender, RoutedEventArgs e)
         {
-            //string picsDir = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\pics";
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.jpg; *.png)|*.jpg;*.png";
-            //openFileDialog.InitialDirectory = picsDir;
 
             bool? success = openFileDialog.ShowDialog();
 
@@ -82,8 +79,8 @@ namespace CS_361_Sliding_Puzzle
             ViewSwitcher.Switch("main_menu");
         }
 
-       
-
+        // User requests to use an image from a inputted website URL
+        // This uses my teammate's Web Image Scrapper microservice
         private void OKURLButton_Click(object sender, RoutedEventArgs e)
         {
             string url = URLTextBox.Text;
@@ -91,6 +88,7 @@ namespace CS_361_Sliding_Puzzle
             string serviceFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Image-Web-Scrapper-main\\";
             string servicePipeFilePath = serviceFolderPath + "images.txt";
             
+            // Write the URL to the pipe file used to communicate with microservice
             File.AppendAllText(servicePipeFilePath, Environment.NewLine + url);
 
             long fileLength = new System.IO.FileInfo(servicePipeFilePath).Length;
@@ -99,6 +97,7 @@ namespace CS_361_Sliding_Puzzle
 
             bool gotResponse = false;
 
+            // Wait for a response back from the Image Scrapper
             for (int i = 0 ; i < 5; i++)
             {
                 Thread.Sleep(1000);
@@ -123,6 +122,8 @@ namespace CS_361_Sliding_Puzzle
 
             System.Drawing.Image image = null;
 
+            // If Image Scrapper responded back, try to retrieve the downloaded image
+            // if unsuccessful, prompt user to try a different website
             try
             {
                 image = System.Drawing.Image.FromFile(serviceFolderPath + "images\\" + fileName + ".jpg");
@@ -147,44 +148,5 @@ namespace CS_361_Sliding_Puzzle
 
             URLTextBox.Text = "";
         }
-
-        /*
-        private void RandomImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            Random rand = new Random();
-
-            // Get images from folder containing bunch of images in project directory
-
-            string picsDir = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "/pics";
-
-            string[] files = Directory.GetFiles(picsDir);
-
-            // Choose random image from directory
-
-            string chosenFile = files[rand.Next(0, files.Length)];
-
-            System.Drawing.Image image = null;
-
-            try
-            {
-                image = System.Drawing.Image.FromFile(chosenFile);
-            }
-            catch (Exception)
-            {
-                System.Diagnostics.Debug.WriteLine("Error with creating image from filename.");
-            }
-
-            if (image != null)
-            {
-                // If image found then switch to the Game view
-                // and pass in the image file
-                ViewSwitcher.Switch(new GameView(image));
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Image is null");
-            }
-        } 
-        */
     }
 }

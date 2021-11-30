@@ -25,7 +25,8 @@ namespace CS_361_Sliding_Puzzle
     /// </summary>
     public partial class GameView : UserControl, ISwitchable
     {
-        private Storyboard storyboard;
+        private Storyboard storyboard1;
+        private Storyboard storyboard2;
 
         private System.Drawing.Image boardImage;
 
@@ -42,17 +43,28 @@ namespace CS_361_Sliding_Puzzle
             InitializeComponent();
 
             // Animation for the canvas opacity on win
-
             var animation1 = new DoubleAnimation();
             animation1.From = 1.0;
             animation1.To = 0.5;
             animation1.Duration = new Duration(TimeSpan.FromSeconds(0.25));
 
-            storyboard = new Storyboard();
-            storyboard.Children.Add(animation1);
+            storyboard1 = new Storyboard();
+            storyboard1.Children.Add(animation1);
 
             Storyboard.SetTargetName(animation1, TheCanvas.Name);
             Storyboard.SetTargetProperty(animation1, new PropertyPath(OpacityProperty));
+
+            // Animation for the "You Win!" text
+            var animation2 = new DoubleAnimation();
+            animation2.From = 0.0;
+            animation2.To = 1.0;
+            animation2.Duration = new Duration(TimeSpan.FromSeconds(0.25));
+
+            storyboard2 = new Storyboard();
+            storyboard2.Children.Add(animation2);
+
+            Storyboard.SetTargetName(animation2, YouWinImage.Name);
+            Storyboard.SetTargetProperty(animation2, new PropertyPath(OpacityProperty));
 
             timer = new System.Timers.Timer();
             timer.Interval = 1000;
@@ -72,7 +84,8 @@ namespace CS_361_Sliding_Puzzle
             game = new SlidingPuzzleGame(boardImage, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
 
             // reset animations
-            storyboard.Stop(TheCanvas);
+            storyboard1.Stop(TheCanvas);
+            storyboard2.Stop(YouWinImage);
 
             RenderCanvas(0);
 
@@ -81,15 +94,17 @@ namespace CS_361_Sliding_Puzzle
             timer.Start();
         }
 
+        // Update the game timer label
         private void UpdateTimerLabel(Object source, System.Timers.ElapsedEventArgs e)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 timeElapsed++;
-                TimerLabel.Content = "Time: " + timeElapsed;
+                TimerLabel.Content = "Time:  " + timeElapsed;
             })); 
         }
 
+        // Render canvas tiles
         private void RenderCanvas(int gameResult)
         {
             Bitmap theRender = new Bitmap((int)TheCanvas.Width, (int)TheCanvas.Height);
@@ -113,41 +128,20 @@ namespace CS_361_Sliding_Puzzle
             // If player won game then display "You Win!" text
             if(gameResult == 2)
             {
-                storyboard.Begin(TheCanvas, true);
-                //g.DrawString("You Win!", new Font("Arial", 36), new SolidBrush(System.Drawing.Color.Black), 98, 98);
-                //g.DrawString("You Win!", new Font("Arial", 36), new SolidBrush(System.Drawing.Color.White), 100, 100);
+                YouWinImage.Visibility = Visibility.Visible;
 
-                using (Font font1 = new Font("Arial", 48, GraphicsUnit.Point))
-                {
-                    System.Drawing.Rectangle rect1 = new System.Drawing.Rectangle(-3, -3, (int)TheCanvas.Width, (int)TheCanvas.Height);
-                    System.Drawing.Rectangle rect2 = new System.Drawing.Rectangle(0, 0, (int)TheCanvas.Width, (int)TheCanvas.Height);
+                storyboard1.Begin(TheCanvas, true);
+                storyboard2.Begin(YouWinImage, true);
 
-                    // Create a StringFormat object with the each line of text, and the block
-                    // of text centered on the page.
-                    StringFormat stringFormat = new StringFormat();
-                    stringFormat.Alignment = StringAlignment.Center;
-                    stringFormat.LineAlignment = StringAlignment.Center;
-
-                    g.DrawString("You Win!", font1, System.Drawing.Brushes.Black, rect1, stringFormat);
-                    
-
-                    g.DrawString("You Win!", font1, System.Drawing.Brushes.White, rect2, stringFormat);
-                    g.DrawRectangle(Pens.Black, System.Drawing.Rectangle.Round(rect2));
-
-                    timer.Stop();
-                }
+                timer.Stop();
             }
 
             g.Dispose();
 
-            ImageSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(theRender.GetHbitmap(),
-                                                                                  IntPtr.Zero,
-                                                                                  Int32Rect.Empty,
-                                                                                  BitmapSizeOptions.FromEmptyOptions()
-                  );
+            ImageSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
+                theRender.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            
             theRender.Dispose();
-
-            //TheCanvas.Children.Add(bitmap);
 
             TheCanvas.Background = new ImageBrush(bitmapSource);
         }
@@ -163,17 +157,15 @@ namespace CS_361_Sliding_Puzzle
             int result = game.ClickedOnBoard(mouseX, mouseY);
 
             RenderCanvas(result);
-
-            if (result == 2)
-            {
-                // Player won game
-            }
         }
 
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
             game = new SlidingPuzzleGame(boardImage, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
-            storyboard.Stop(TheCanvas);
+            storyboard1.Stop(TheCanvas);
+            storyboard2.Stop(YouWinImage);
+            YouWinImage.Visibility = Visibility.Hidden;
+
             timeElapsed = 0;
             timer.Start();
             RenderCanvas(0);
