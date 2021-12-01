@@ -42,6 +42,17 @@ namespace CS_361_Sliding_Puzzle
         {
             InitializeComponent();
 
+            InitCanvasAnimation();
+            InitWinScreenAnimation();
+
+            // Timer for updating the timer label every second
+            timer = new System.Timers.Timer();
+            timer.Interval = 1000;
+            timer.Elapsed += UpdateTimerLabel;
+        }
+
+        private void InitCanvasAnimation()
+        {
             // Animation for the canvas opacity on win
             var animation1 = new DoubleAnimation();
             animation1.From = 1.0;
@@ -53,7 +64,10 @@ namespace CS_361_Sliding_Puzzle
 
             Storyboard.SetTargetName(animation1, TheCanvas.Name);
             Storyboard.SetTargetProperty(animation1, new PropertyPath(OpacityProperty));
+        }
 
+        private void InitWinScreenAnimation()
+        {
             // Animation for the "You Win!" text
             var animation2 = new DoubleAnimation();
             animation2.From = 0.0;
@@ -65,10 +79,6 @@ namespace CS_361_Sliding_Puzzle
 
             Storyboard.SetTargetName(animation2, YouWinImage.Name);
             Storyboard.SetTargetProperty(animation2, new PropertyPath(OpacityProperty));
-
-            timer = new System.Timers.Timer();
-            timer.Interval = 1000;
-            timer.Elapsed += UpdateTimerLabel;
         }
 
         // Reset all variables
@@ -119,7 +129,11 @@ namespace CS_361_Sliding_Puzzle
 
                     if (tileImage != null)
                     {
-                        g.DrawImage(tileImage, new System.Drawing.Rectangle(x * tileImage.Width, y * tileImage.Height, tileImage.Width, tileImage.Height), new System.Drawing.Rectangle(0, 0, tileImage.Width, tileImage.Height), GraphicsUnit.Pixel);
+                        g.DrawImage(
+                            tileImage, 
+                            new System.Drawing.Rectangle(x * tileImage.Width, y * tileImage.Height, tileImage.Width, tileImage.Height),
+                            new System.Drawing.Rectangle(0, 0, tileImage.Width, tileImage.Height),
+                            GraphicsUnit.Pixel);
                     }
                     
                 }
@@ -147,7 +161,7 @@ namespace CS_361_Sliding_Puzzle
         }
 
         // When user clicks on the board
-        private void TheCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        private void TheCanvasMouseUp(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Point mousePos = e.GetPosition(TheCanvas);
 
@@ -159,7 +173,7 @@ namespace CS_361_Sliding_Puzzle
             RenderCanvas(result);
         }
 
-        private void NewGameButton_Click(object sender, RoutedEventArgs e)
+        private void NewGameButtonClick(object sender, RoutedEventArgs e)
         {
             game = new SlidingPuzzleGame(boardImage, (int)TheCanvas.Width, (int)TheCanvas.Height, rows, columns);
             storyboard1.Stop(TheCanvas);
@@ -171,7 +185,7 @@ namespace CS_361_Sliding_Puzzle
             RenderCanvas(0);
         }
 
-        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        private void QuitButtonClick(object sender, RoutedEventArgs e)
         {
             // reset everything
 

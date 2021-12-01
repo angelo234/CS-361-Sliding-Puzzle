@@ -7,12 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600" Height="600" Width="600">
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="White" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
         <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Center" Margin="0,220,0,0" VerticalAlignment="Top" Height="60" Width="150" FontSize="36" Click="PlayButtonClick" Visibility="Visible"/>
         <Button x:Name="QuitButton" Content="Exit" HorizontalAlignment="Center" Margin="0,320,0,0" VerticalAlignment="Top" Height="60" Width="150" FontSize="36" Click="QuitButton_Click"/>
         <Label Content="Sliding Puzzle Game" HorizontalAlignment="Center" Margin="0,98,0,0" VerticalAlignment="Top" Height="79" Width="489" FontSize="48" HorizontalContentAlignment="Center" Background="{x:Null}" Foreground="White"/>

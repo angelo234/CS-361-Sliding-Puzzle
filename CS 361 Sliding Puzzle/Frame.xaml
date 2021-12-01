@@ -6,4 +6,7 @@
         xmlns:local="clr-namespace:CS_361_Sliding_Puzzle"
         mc:Ignorable="d"
         Title="Sliding Puzzle Game" Height="600" Width="600" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
+    <Window.Background>
+        <ImageBrush ImageSource="/background.JPG" Stretch="UniformToFill" TileMode="None" Opacity="0.75"/>
+    </Window.Background>
 </Window>

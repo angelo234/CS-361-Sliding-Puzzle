@@ -7,15 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600" Height="600" Width="600">
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="White" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Button x:Name="InternetImageButton" Content="Get Image from a Website" HorizontalAlignment="Center" Margin="0,320,0,0" VerticalAlignment="Top" Height="60" Width="350" FontSize="24" Click="InternetImageButton_Click"/>
-        <Button x:Name="LocalImageButton" Content="Select Image on Computer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="350" FontSize="24" Margin="0,220,0,0" Click="LocalImageButton_Click"/>
-        <Button x:Name="BackButton" Content="Back to Main Menu" HorizontalAlignment="Right" Margin="0,428,175,0" VerticalAlignment="Top" Height="50" Width="250" FontSize="22" Click="BackButton_Click"/>
+        <Button x:Name="InternetImageButton" Content="Get Image from a Website" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Height="50" Width="350" FontSize="24" Click="InternetImageButton_Click"/>
+        <Button x:Name="LocalImageButton" Content="Select Image on Computer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="350" FontSize="24" Margin="0,222,0,0" Click="LocalImageButton_Click"/>
+        <Button x:Name="BackButton" Content="Back to Main Menu" HorizontalAlignment="Right" Margin="0,428,175,0" VerticalAlignment="Top" Height="45" Width="250" FontSize="22" Click="BackButton_Click"/>
         <Label Content="Select an image" HorizontalAlignment="Center" Margin="0,111,0,0" VerticalAlignment="Top" Height="68" Width="488" FontSize="36" HorizontalContentAlignment="Center" Background="{x:Null}" Foreground="White"/>
         <Grid x:Name="WebsiteURLGrid" Margin="108,292,108,192" Visibility="Hidden">
             <Grid.ColumnDefinitions>

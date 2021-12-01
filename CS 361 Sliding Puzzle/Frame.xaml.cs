@@ -26,7 +26,12 @@ namespace CS_361_Sliding_Puzzle
         public Frame()
         {
             InitializeComponent();
+            InitAnimation(); 
+            InitViewSwitcher();
+        }
 
+        private void InitAnimation()
+        {
             // Animate opacity when changing views
             var animation1 = new DoubleAnimation();
             animation1.From = 0;
@@ -38,8 +43,10 @@ namespace CS_361_Sliding_Puzzle
 
             Storyboard.SetTargetName(animation1, Name);
             Storyboard.SetTargetProperty(animation1, new PropertyPath(OpacityProperty));
-
-            // Initialize view switcher
+        }
+        
+        private void InitViewSwitcher()
+        {         
             ViewSwitcher.TheFrame = this;
 
             ViewSwitcher.TheViews.Add("main_menu", new MainMenuView());

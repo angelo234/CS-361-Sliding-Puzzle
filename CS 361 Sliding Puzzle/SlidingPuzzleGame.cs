@@ -41,6 +41,12 @@ namespace CS_361_Sliding_Puzzle
 
             // Initialize the game
             InitGame();
+
+            // Scramble tiles
+            ScrambleTiles();
+
+            running = true;
+            initialized = true;
         }
 
         private void InitGame()
@@ -61,7 +67,11 @@ namespace CS_361_Sliding_Puzzle
                     Image tileImage = new Bitmap(tileSizeX, tileSizeY);
 
                     var g = Graphics.FromImage(tileImage);
-                    g.DrawImage(boardImage, new Rectangle(0, 0, tileSizeX, tileSizeY), new Rectangle(x * tileSizeX, y * tileSizeY, tileSizeX, tileSizeY), GraphicsUnit.Pixel);
+                    g.DrawImage(
+                        boardImage,
+                        new Rectangle(0, 0, tileSizeX, tileSizeY),
+                        new Rectangle(x * tileSizeX, y * tileSizeY, tileSizeX, tileSizeY),
+                        GraphicsUnit.Pixel);
 
                     // Create tiles but leave bottom right empty
                     if (index != rows * columns - 1)
@@ -78,11 +88,6 @@ namespace CS_361_Sliding_Puzzle
                     index++;
                 }
             }
-
-            ScrambleTiles();
-
-            running = true;
-            initialized = true;
         }
 
         // Randomly scramble tiles
@@ -136,34 +141,6 @@ namespace CS_361_Sliding_Puzzle
             return null;
         }
         
-        // For debugging purposes
-        public void PrintBoard()
-        {
-            for (int y = 0; y < rows; y++)
-            {
-                for (int x = 0; x < columns; x++)
-                {
-                    Tile tile = board[x, y];
-
-                    if(tile != null)
-                    {
-                        System.Diagnostics.Debug.Write(tile.Index);
-                    }
-                    else
-                    {
-                        System.Diagnostics.Debug.Write("O");
-                    }
-
-                    if (x != columns - 1)
-                    {
-                        System.Diagnostics.Debug.Write(" | ");
-                    }
-                }
-
-                System.Diagnostics.Debug.WriteLine("\n--------------");
-            }
-        }
-
         // Returns null if cannot be moved
         // or the position of the free space
         private int[] CanMoveTile(int tileX, int tileY)

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="background.JPG" />
     <None Remove="youwin.PNG" />
     <None Remove="youwin2.PNG" />
   </ItemGroup>
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="background.JPG" />
     <Resource Include="youwin.PNG" />
   </ItemGroup>
 
